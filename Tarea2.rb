@@ -1,6 +1,7 @@
 class ContadorDePalabras
     def initialize
         #Aqui se crea el hash y se inicializa
+        #Datos es la variable de instancia
       @datos = {
         palabra: "",
         contador: 0,
@@ -30,6 +31,14 @@ class ContadorDePalabras
   
       puts "El número de palabras es: #{@datos[:contador]}"
     end
+
+    def modificar_datos
+        puts "Modifica la palabra:"
+        @datos[:palabra] = gets.chomp
+        @datos[:contador] = 0
+        @datos[:bandera] = false
+    end
+
   end
   
   # Inicializar
@@ -37,4 +46,8 @@ class ContadorDePalabras
   # Llenar
   contador.llenar_palabra
   # Lógica
-  contador.recorrer_letrash 
+  contador.recorrer_letras
+  # Modificar 
+  contador.modificar_datos 
+  # Lógica otra vez >:v
+  contador.recorrer_letras
