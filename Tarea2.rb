@@ -1,53 +1,33 @@
-class ContadorDePalabras
-    def initialize
-        #Aqui se crea el hash y se inicializa
-        #Datos es la variable de instancia
-      @datos = {
-        palabra: "",
-        contador: 0,
-        bandera: false
-      }
+class ContadorPalabras
+    def initialize(cadena)
+      @cadena = cadena
     end
   
-    def llenar_palabra
-      puts "Ingresa una palabra:"
-      @datos[:palabra] = gets.chomp
-    end
+    def contar_palabras_repetidas
+      # HASH para almacenar las palabras y su frecuencia
+      frecuencia_palabras = Hash.new(0)
   
-    def recorrer_letras
-        #Aqui se usa el iterador each_with_index
-      @datos[:palabra].chars.each_with_index do |letra, indice_actual|
-        if letra == " " && @datos[:bandera]
-          @datos[:bandera] = false
-          @datos[:contador] += 1
-        else
-          @datos[:bandera] = true
-        end
+      # Dividimos la cadena en palabras usando espacios en blanco como separadores
+      palabras = @cadena.split(/\s+/)
   
-        if indice_actual == @datos[:palabra].length - 1 && letra != " "
-          @datos[:contador] += 1
-        end
+      # Contar la frecuencia de cada palabra con ITERADOR
+      palabras.each do |palabra|
+        palabra = palabra.downcase
+        frecuencia_palabras[palabra] += 1
       end
   
-      puts "El número de palabras es: #{@datos[:contador]}"
-    end
-
-    def modificar_datos
-        puts "Modifica la palabra:"
-        @datos[:palabra] = gets.chomp
-        @datos[:contador] = 0
-        @datos[:bandera] = false
+      # Palabras que aparecen más de una vez
+      palabras_repetidas = frecuencia_palabras.select { |_palabra, frecuencia| frecuencia > 1 }
+  
+      palabras_repetidas.each do |palabra, frecuencia|
+        puts "#{palabra}: #{frecuencia} veces"
+      end
     end
 
   end
   
-  # Inicializar
-  contador = ContadorDePalabras.new
-  # Llenar
-  contador.llenar_palabra
-  # Lógica
-  contador.recorrer_letras
-  # Modificar 
-  contador.modificar_datos 
-  # Lógica otra vez >:v
-  contador.recorrer_letras
+  # Ejemplo de uso
+  cadena_ejemplo = "Hola mundo hola ruby mundo mundo"
+  contador = ContadorPalabras.new(cadena_ejemplo)
+  contador.contar_palabras_repetidas
+  
