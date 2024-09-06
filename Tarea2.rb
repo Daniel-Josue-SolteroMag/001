@@ -18,7 +18,7 @@ class ContadorPalabras
   
       # Palabras que aparecen más de una vez
       palabras_repetidas = frecuencia_palabras.select { |_palabra, frecuencia| frecuencia > 1 }
-  
+
       palabras_repetidas.each do |palabra, frecuencia|
         puts "#{palabra}: #{frecuencia} veces"
       end
